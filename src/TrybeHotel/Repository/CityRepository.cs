@@ -1,17 +1,19 @@
 using TrybeHotel.Models;
 using TrybeHotel.Dto;
+using TrybeHotel.Utils.interfaces;
 
 namespace TrybeHotel.Repository
 {
     public class CityRepository : ICityRepository
     {
         protected readonly ITrybeHotelContext _context;
-        public CityRepository(ITrybeHotelContext context)
+        protected readonly IEntityUtils _entityUtils;
+        public CityRepository(ITrybeHotelContext context, IEntityUtils entityUtils)
         {
             _context = context;
+            _entityUtils = entityUtils;
         }
 
-        // 4. Refatore o endpoint GET /city
         public IEnumerable<CityDto> GetCities()
         {
             var response = _context.Cities.Select(city => new CityDto
@@ -24,7 +26,6 @@ namespace TrybeHotel.Repository
             return response;
         }
 
-        // 2. Refatore o endpoint POST /city
         public CityDto AddCity(City city)
         {
             _context.Cities.Add(city);
@@ -40,10 +41,19 @@ namespace TrybeHotel.Repository
             return response;
         }
 
-        // 3. Desenvolva o endpoint PUT /city
         public CityDto UpdateCity(City city)
         {
-           throw new NotImplementedException();
+            _context.Cities.Update(city);
+            _context.SaveChanges();
+
+            var response = new CityDto
+            {
+                CityId = city.CityId,
+                Name = city.Name,
+                State = city.State
+            };
+
+            return response;
         }
 
     }

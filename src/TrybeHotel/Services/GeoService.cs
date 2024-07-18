@@ -16,7 +16,7 @@ namespace TrybeHotel.Services
 
         public async Task<object> GetGeoStatus()
         {
-            var req = new HttpRequestMessage(HttpMethod.Get, "status.php?format=json");
+            var req = new HttpRequestMessage(HttpMethod.Get, "status?format=json");
 
             req.Headers.Add("Accept", "application/json");
             req.Headers.Add("User-Agent", "aspnet-user-agent");

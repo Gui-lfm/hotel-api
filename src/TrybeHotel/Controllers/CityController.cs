@@ -31,11 +31,12 @@ namespace TrybeHotel.Controllers
             return Created("", response);
         }
 
-        // 3. Desenvolva o endpoint PUT /city
         [HttpPut]
         public IActionResult PutCity([FromBody] City city)
         {
-            throw new NotImplementedException();
+            var response = _repository.UpdateCity(city);
+
+            return Ok(response);
         }
     }
 }
