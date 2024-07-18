@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <RuntimeIdentifier>ubuntu.22.04-x64</RuntimeIdentifier>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>TrybeHotel</RootNamespace>
     <ErrorLog>compiler-diagnostics.sarif</ErrorLog> 

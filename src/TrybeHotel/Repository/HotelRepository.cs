@@ -1,26 +1,38 @@
 using TrybeHotel.Models;
 using TrybeHotel.Dto;
+using TrybeHotel.Utils.interfaces;
 
 namespace TrybeHotel.Repository
 {
     public class HotelRepository : IHotelRepository
     {
         protected readonly ITrybeHotelContext _context;
-        public HotelRepository(ITrybeHotelContext context)
+        private readonly IEntityUtils _entityUtils;
+        public HotelRepository(ITrybeHotelContext context, IEntityUtils entityUtils)
         {
             _context = context;
+            _entityUtils = entityUtils;
         }
 
-        //  5. Refatore o endpoint GET /hotel
         public IEnumerable<HotelDto> GetHotels()
         {
-            throw new NotImplementedException();
+            var hotels = _context.Hotels.Select(hotel => _entityUtils.CreateHotelDto(hotel));
+
+            return hotels;
         }
 
-        // 6. Refatore o endpoint POST /hotel
         public HotelDto AddHotel(Hotel hotel)
         {
-           throw new NotImplementedException();
+            var cityExists = _entityUtils.VerifyCity(hotel.CityId);
+
+            hotel.City = cityExists;
+
+            _context.Hotels.Add(hotel);
+            _context.SaveChanges();
+
+            var createdDto = _entityUtils.CreateHotelDto(hotel);
+
+            return createdDto;
         }
     }
 }

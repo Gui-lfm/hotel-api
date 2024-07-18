@@ -6,6 +6,8 @@ using Microsoft.IdentityModel.Tokens;
 using TrybeHotel.Models;
 using TrybeHotel.Services;
 using System.Security.Claims;
+using TrybeHotel.Utils;
+using TrybeHotel.Utils.interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,7 @@ builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 builder.Services.AddHttpClient<IGeoService, GeoService>();
+builder.Services.AddScoped<IEntityUtils, EntityUtils>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
