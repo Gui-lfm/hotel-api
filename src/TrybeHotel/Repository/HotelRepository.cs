@@ -18,6 +18,7 @@ namespace TrybeHotel.Repository
         public HotelRepository(ITrybeHotelContext context)
         {
             _context = context;
+            _entityUtils = null!;
         }
 
         public IEnumerable<HotelDto> GetHotels()
