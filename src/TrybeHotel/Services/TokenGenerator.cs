@@ -27,7 +27,7 @@ namespace TrybeHotel.Services
             {
                 Subject = AddClaims(user),
                 SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_tokenOptions.Secret)),
+                    new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_tokenOptions.Secret!)),
                     SecurityAlgorithms.HmacSha256Signature
                 ),
                 Expires = DateTime.Now.AddDays(_tokenOptions.ExpiresDay)

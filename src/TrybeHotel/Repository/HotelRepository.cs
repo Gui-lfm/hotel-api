@@ -14,7 +14,6 @@ namespace TrybeHotel.Repository
             _entityUtils = entityUtils;
         }
 
-        // Construtor adicional para testes
         public HotelRepository(ITrybeHotelContext context)
         {
             _context = context;
@@ -23,16 +22,22 @@ namespace TrybeHotel.Repository
 
         public IEnumerable<HotelDto> GetHotels()
         {
-            var hotels = _context.Hotels.ToList();
+            var DtoResponse = _context.Hotels
+            .Join(
+                _context.Cities,
+                hotel => hotel.CityId,
+                city => city.CityId,
+                (hotel, city) => new HotelDto
+                {
+                    HotelId = hotel.HotelId,
+                    Name = hotel.Name,
+                    Address = hotel.Address,
+                    CityId = hotel.CityId,
+                    CityName = city.Name,
+                    State = city.State
+                });
 
-            var DtoResponse = hotels.Select(hotel =>
-            {
-                var city = _entityUtils.VerifyCity(hotel.CityId);
-                hotel.City = city;
-                return _entityUtils.CreateHotelDto(hotel);
-            });
-
-            return DtoResponse;
+            return DtoResponse.ToList();
         }
 
         public HotelDto AddHotel(Hotel hotel)
