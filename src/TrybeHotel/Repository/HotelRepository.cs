@@ -14,6 +14,12 @@ namespace TrybeHotel.Repository
             _entityUtils = entityUtils;
         }
 
+        // Construtor adicional para testes
+        public HotelRepository(ITrybeHotelContext context)
+        {
+            _context = context;
+        }
+
         public IEnumerable<HotelDto> GetHotels()
         {
             var hotels = _context.Hotels.ToList();
