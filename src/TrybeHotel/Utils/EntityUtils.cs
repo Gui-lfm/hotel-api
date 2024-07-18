@@ -53,7 +53,8 @@ public class EntityUtils : IEntityUtils
       Name = hotel.Name,
       Address = hotel.Address,
       CityId = hotel.CityId,
-      CityName = hotel.City?.Name
+      CityName = hotel.City?.Name,
+      State = hotel.City?.State
     };
   }
 
