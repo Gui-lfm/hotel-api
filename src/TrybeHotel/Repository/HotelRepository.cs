@@ -16,9 +16,16 @@ namespace TrybeHotel.Repository
 
         public IEnumerable<HotelDto> GetHotels()
         {
-            var hotels = _context.Hotels.Select(hotel => _entityUtils.CreateHotelDto(hotel));
+            var hotels = _context.Hotels.ToList();
 
-            return hotels;
+            var DtoResponse = hotels.Select(hotel =>
+            {
+                var city = _entityUtils.VerifyCity(hotel.CityId);
+                hotel.City = city;
+                return _entityUtils.CreateHotelDto(hotel);
+            });
+
+            return DtoResponse;
         }
 
         public HotelDto AddHotel(Hotel hotel)
