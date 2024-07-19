@@ -6,7 +6,7 @@ namespace TrybeHotel.Repository.Interfaces
     public interface ICityRepository
     {
         IEnumerable<CityDto> GetCities();
-        CityDto AddCity(City city);
-        CityDto UpdateCity(City city);
+        CityDto AddCity(CityDtoInsert city);
+        CityDto UpdateCity(CityDto city);
     }
 }

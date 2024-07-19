@@ -4,8 +4,11 @@ namespace TrybeHotel.Dto
 {
     public class CityDto
     {
+        [Required]
         public int CityId { get; set; }
+        [Required]
         public string? Name { get; set; }
+        [Required]
         public string? State { get; set; }
     }
 

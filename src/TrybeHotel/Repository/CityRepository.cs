@@ -28,24 +28,34 @@ namespace TrybeHotel.Repository
             return response;
         }
 
-        public CityDto AddCity(City city)
+        public CityDto AddCity(CityDtoInsert city)
         {
-            _context.Cities.Add(city);
+            var newCity = new City
+            {
+                Name = city.Name!,
+                State = city.State!
+            };
+
+            _context.Cities.Add(newCity);
             _context.SaveChanges();
 
             var response = new CityDto
             {
-                CityId = city.CityId,
-                Name = city.Name,
-                State = city.State
+                CityId = newCity.CityId,
+                Name = newCity.Name,
+                State = newCity.State
             };
 
             return response;
         }
 
-        public CityDto UpdateCity(City city)
+        public CityDto UpdateCity(CityDto city)
         {
-            _context.Cities.Update(city);
+            var cityFound = _entityUtils.VerifyCity(city.CityId);
+            cityFound.Name = city.Name!;
+            cityFound.State = city.State!;
+
+            _context.Cities.Update(cityFound);
             _context.SaveChanges();
 
             var response = new CityDto
