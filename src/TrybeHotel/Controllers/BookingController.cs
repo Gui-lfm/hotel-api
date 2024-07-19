@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using TrybeHotel.Dto;
+using TrybeHotel.Exceptions;
 
 namespace TrybeHotel.Controllers
 {
@@ -20,6 +21,17 @@ namespace TrybeHotel.Controllers
             _repository = repository;
         }
 
+        /// <summary>
+        /// Adiciona uma nova reserva ao banco de dados.
+        /// </summary>
+        /// <param name="bookingInsert">Objeto BookingDtoInsert contendo os detalhes da reserva.</param>
+        /// <returns>Os detalhes da reserva criado.</returns>
+        /// <response code="201">Retorna os itens do objeto BookingResponse.</response>
+        /// <response code="400">Se os dados fornecidos forem inválidos.</response>
+        /// <response code="401">Se o usuário não estiver autenticado.</response>
+        /// <response code="404">Se a entidade referenciada não for encontrada.</response>
+        /// <response code="409">Se o número de hospedes for maior que a capacidade do quarto.</response>
+        /// <response code="500">Se ocorrer um erro interno do servidor.</response>
         [HttpPost]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Authorize(Policy = "Client")]
@@ -27,29 +39,47 @@ namespace TrybeHotel.Controllers
         {
             try
             {
+                if (bookingInsert == null)
+                {
+                    return BadRequest(new { message = "Booking data is required" });
+                }
+
                 var token = HttpContext.User.Identity as ClaimsIdentity;
                 var email = token?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-
                 if (email == null)
                 {
-                    throw new Exception("valid user email is required");
+                    return Unauthorized(new { message = "Valid user email is required" });
                 }
 
                 var response = _repository.Add(bookingInsert, email);
                 return Created("", response);
             }
+            catch (EntityNotFoundException e)
+            {
+                return NotFound(new { message = e.Message });
+            }
+            catch (GuestOverCapacityException e)
+            {
+                return Conflict(new { message = e.Message });
+            }
             catch (Exception e)
             {
-
-                return Conflict(new { message = e.Message });
+                return StatusCode(500, new { message = e.Message });
             }
         }
 
-
+        /// <summary>
+        /// Endpoint responsável por listar uma única reserva.
+        /// </summary>
+        /// <param name="Bookingid">Id da reserva</param>
+        /// <returns>Os detalhes da reserva especificada.</returns>
+        /// <response code="200">Retorna os itens do objeto BookingResponse.</response>
+        /// <response code="401">Se o usuário não estiver autenticado ou se as informações da reserva forem acessadas por um usuário que não a criou.</response>
+        /// <response code="500">Se ocorrer um erro interno do servidor.</response>
         [HttpGet("{Bookingid}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Authorize(Policy = "Client")]
-        public IActionResult GetBooking(int Bookingid)
+        public IActionResult GetBooking([FromRoute] int Bookingid)
         {
             try
             {
@@ -57,19 +87,27 @@ namespace TrybeHotel.Controllers
                 var email = token?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
                 if (email == null)
                 {
-                    throw new UnauthorizedAccessException();
+                    return Unauthorized(new { message = "Valid user email is required" });
                 }
+
+
                 var response = _repository.GetBooking(Bookingid, email);
                 return Ok(response);
             }
+            catch (UnauthorizedAccessException e)
+            {
+
+                return Unauthorized(new { message = e.Message });
+            }
+            catch (EntityNotFoundException e)
+            {
+                return NotFound(new { message = e.Message });
+            }
             catch (Exception e)
             {
-                if (e is UnauthorizedAccessException)
-                {
-                    return Unauthorized(new { message = e.Message });
-                }
-                return Conflict(new { message = e.Message });
+                return StatusCode(500, new { message = e.Message });
             }
+
         }
     }
 }

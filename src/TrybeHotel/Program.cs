@@ -11,6 +11,8 @@ using TrybeHotel.Utils;
 using TrybeHotel.Utils.interfaces;
 using TrybeHotel.Context;
 using TrybeHotel.Context.Interfaces;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +31,14 @@ builder.Services.AddHttpClient<IGeoService, GeoService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    string file = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    string path = Path.Combine(AppContext.BaseDirectory, file);
+    options.IncludeXmlComments(path);
+
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Hotel Api", Description = "Aplicação de reservas de uma rede de hotéis", Version = "v1" });
+});
 builder.Services.AddControllersWithViews()
                 .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddHttpClient();
@@ -79,13 +88,12 @@ builder.Services.AddAuthorization(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.UseDeveloperExceptionPage();
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseDeveloperExceptionPage();
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+});
 
 app.UseHttpsRedirection();
 app.UseRouting();
@@ -96,7 +104,6 @@ app.UseCors(c => c.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 app.UseAuthentication();
 
 app.UseAuthorization();
-
 
 app.MapControllers();
 

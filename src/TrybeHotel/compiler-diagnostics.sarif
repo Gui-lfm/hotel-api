@@ -246,9 +246,9 @@
               "resultFile": {
                 "uri": "file:///home/guilherme/Documentos/csharp-aceleracao/exercicios/csharp-001-projeto-trybe-hotel-fase-c/src/TrybeHotel/Program.cs",
                 "region": {
-                  "startLine": 105,
+                  "startLine": 112,
                   "startColumn": 22,
-                  "endLine": 105,
+                  "endLine": 112,
                   "endColumn": 29
                 }
               }
@@ -259,9 +259,9 @@
               "physicalLocation": {
                 "uri": "file:///home/guilherme/Documentos/csharp-aceleracao/exercicios/csharp-001-projeto-trybe-hotel-fase-c/src/TrybeHotel/Program.cs",
                 "region": {
-                  "startLine": 15,
+                  "startLine": 17,
                   "startColumn": 1,
-                  "endLine": 15,
+                  "endLine": 17,
                   "endColumn": 4
                 }
               }

@@ -6,6 +6,8 @@
     <RuntimeIdentifier>ubuntu.22.04-x64</RuntimeIdentifier>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>TrybeHotel</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
     <ErrorLog>compiler-diagnostics.sarif</ErrorLog> 
   </PropertyGroup>
 
