@@ -5,7 +5,7 @@
 namespace TrybeHotel.Migrations
 {
     /// <inheritdoc />
-    public partial class AddTables2 : Migration
+    public partial class AddAdminUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

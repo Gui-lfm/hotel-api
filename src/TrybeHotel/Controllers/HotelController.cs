@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TrybeHotel.Models;
-using TrybeHotel.Repository;
+using TrybeHotel.Repository.Interfaces;
 using TrybeHotel.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

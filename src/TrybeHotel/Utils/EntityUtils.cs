@@ -3,6 +3,7 @@ using TrybeHotel.Repository;
 using TrybeHotel.Exceptions;
 using TrybeHotel.Utils.interfaces;
 using TrybeHotel.Dto;
+using TrybeHotel.Context.Interfaces;
 
 namespace TrybeHotel.Utils;
 

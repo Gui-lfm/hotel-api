@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using TrybeHotel.Context.Interfaces;
 using TrybeHotel.Models;
+using TrybeHotel.Repository;
 
-namespace TrybeHotel.Repository;
+namespace TrybeHotel.Context;
 public class TrybeHotelContext : DbContext, ITrybeHotelContext
 {
     public DbSet<City> Cities { get; set; } = null!;

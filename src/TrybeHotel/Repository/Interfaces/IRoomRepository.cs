@@ -1,7 +1,7 @@
 using TrybeHotel.Models;
 using TrybeHotel.Dto;
 
-namespace TrybeHotel.Repository
+namespace TrybeHotel.Repository.Interfaces
 {
     public interface IRoomRepository
     {

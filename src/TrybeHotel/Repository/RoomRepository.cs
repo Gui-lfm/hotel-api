@@ -2,6 +2,8 @@ using TrybeHotel.Models;
 using TrybeHotel.Dto;
 using TrybeHotel.Utils.interfaces;
 using TrybeHotel.Exceptions;
+using TrybeHotel.Repository.Interfaces;
+using TrybeHotel.Context.Interfaces;
 
 namespace TrybeHotel.Repository
 {

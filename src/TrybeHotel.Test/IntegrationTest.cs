@@ -10,6 +10,9 @@ using System.Text.Json;
 using System.Diagnostics;
 using System.Xml;
 using System.IO;
+using TrybeHotel.Context.Interfaces;
+using TrybeHotel.Repository.Interfaces;
+using TrybeHotel.Context;
 
 public class LoginJson {
     public string? token { get; set; }

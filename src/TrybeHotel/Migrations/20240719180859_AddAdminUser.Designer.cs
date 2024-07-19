@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TrybeHotel.Repository;
+using TrybeHotel.Context;
 
 #nullable disable
 
 namespace TrybeHotel.Migrations
 {
     [DbContext(typeof(TrybeHotelContext))]
-    [Migration("20240718140519_AddTables2")]
-    partial class AddTables2
+    [Migration("20240719180859_AddAdminUser")]
+    partial class AddAdminUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

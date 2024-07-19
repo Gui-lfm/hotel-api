@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TrybeHotel.Models;
 
-namespace TrybeHotel.Repository
+namespace TrybeHotel.Context.Interfaces
 {
     public interface ITrybeHotelContext 
     {

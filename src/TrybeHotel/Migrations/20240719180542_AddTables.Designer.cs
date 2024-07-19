@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TrybeHotel.Repository;
+using TrybeHotel.Context;
 
 #nullable disable
 
 namespace TrybeHotel.Migrations
 {
     [DbContext(typeof(TrybeHotelContext))]
-    [Migration("20240718140104_AddTables")]
+    [Migration("20240719180542_AddTables")]
     partial class AddTables
     {
         /// <inheritdoc />

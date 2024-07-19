@@ -1,6 +1,6 @@
 using System.Net.Http;
 using TrybeHotel.Dto;
-using TrybeHotel.Repository;
+using TrybeHotel.Repository.Interfaces;
 
 namespace TrybeHotel.Services
 {
