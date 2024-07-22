@@ -6,7 +6,7 @@ namespace TrybeHotel.Repository.Interfaces
     public interface IRoomRepository
     {
         IEnumerable<RoomDto> GetRooms(int HotelId);
-        RoomDto AddRoom(Room room);
+        RoomDto AddRoom(RoomDtoInsert room);
 
         void DeleteRoom(int RoomId);
     }

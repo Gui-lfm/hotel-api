@@ -34,19 +34,27 @@ namespace TrybeHotel.Repository
 
         }
 
-        public RoomDto AddRoom(Room room)
+        public RoomDto AddRoom(RoomDtoInsert roomDto)
         {
-            var hotel = _entityUtils.VerifyHotel(room.HotelId);
+            var hotel = _entityUtils.VerifyHotel(roomDto.HotelId);
             var city = _entityUtils.VerifyCity(hotel.CityId);
 
             hotel.City = city;
 
             HotelDto hotelDto = _entityUtils.CreateHotelDto(hotel);
 
-            _context.Rooms.Add(room);
+            var newRoom = new Room
+            {
+                Name = roomDto.Name!,
+                Capacity = roomDto.Capacity,
+                Image = roomDto.Image!,
+                HotelId = roomDto.HotelId
+            };
+
+            _context.Rooms.Add(newRoom);
             _context.SaveChanges();
 
-            var createdDto = _entityUtils.CreateRoomDto(room, hotelDto);
+            var createdDto = _entityUtils.CreateRoomDto(newRoom, hotelDto);
 
             return createdDto;
         }
