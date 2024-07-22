@@ -41,7 +41,7 @@ namespace TrybeHotel.Controllers
         }
 
         /// <summary>
-        /// Adiciona um novo hotel ao banco de dados. Usuário autenticado necessita autorização de 'Admin'.
+        /// Adiciona um novo hotel ao banco de dados. Autorização de 'Admin' necessária para a operação.
         /// </summary>
         /// <param name="hotel">Objeto HotelDtoInsert contendo o nome, endereço e cityId:</param>
         /// <response code="201"> Retorna os itens do objeto CityDto.</response>

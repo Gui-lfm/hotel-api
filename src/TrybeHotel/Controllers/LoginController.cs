@@ -20,6 +20,14 @@ namespace TrybeHotel.Controllers
             _tokenGenerator = new TokenGenerator();
         }
 
+        /// <summary>
+        /// Realiza o login de usuário existente no banco de dados
+        /// </summary>
+        /// <param name="login">Objeto loginDto, contendo email e senha</param>
+        /// <returns>Retorna um token.</returns>
+        /// <response code="200"> retorna um objeto com um token de autorização.</response>
+        /// <response code="401"> Caso email e/ou senha estejam incorretos.</response>
+        /// <response code="500"> Se ocorrer um erro interno do servidor.</response>
         [HttpPost]
         public IActionResult Login([FromBody] LoginDto login)
         {
@@ -29,10 +37,14 @@ namespace TrybeHotel.Controllers
                 var token = _tokenGenerator.Generate(user);
                 return Ok(new { token });
             }
+            catch (UnauthorizedAccessException e)
+            {
+                return Unauthorized(new { message = e.Message });
+            }
             catch (Exception e)
             {
 
-                return Unauthorized(new { message = e.Message });
+                return StatusCode(500, new { message = e.Message });
             }
         }
     }
