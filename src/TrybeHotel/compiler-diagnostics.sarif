@@ -160,48 +160,6 @@
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///home/guilherme/Documentos/csharp-aceleracao/exercicios/csharp-001-projeto-trybe-hotel-fase-c/src/TrybeHotel/Models/Hotel.cs",
-                "region": {
-                  "startLine": 10,
-                  "startColumn": 17,
-                  "endLine": 10,
-                  "endColumn": 21
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "CS8618",
-          "level": "warning",
-          "message": "O propriedade não anulável 'Address' precisa conter um valor não nulo ao sair do construtor. Considere declarar o propriedade como anulável.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///home/guilherme/Documentos/csharp-aceleracao/exercicios/csharp-001-projeto-trybe-hotel-fase-c/src/TrybeHotel/Models/Hotel.cs",
-                "region": {
-                  "startLine": 12,
-                  "startColumn": 17,
-                  "endLine": 12,
-                  "endColumn": 24
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "CS8618",
-          "level": "warning",
-          "message": "O propriedade não anulável 'Name' precisa conter um valor não nulo ao sair do construtor. Considere declarar o propriedade como anulável.",
-          "locations": [
-            {
-              "resultFile": {
                 "uri": "file:///home/guilherme/Documentos/csharp-aceleracao/exercicios/csharp-001-projeto-trybe-hotel-fase-c/src/TrybeHotel/Models/City.cs",
                 "region": {
                   "startLine": 10,
@@ -229,6 +187,48 @@
                   "startColumn": 23,
                   "endLine": 11,
                   "endColumn": 28
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8618",
+          "level": "warning",
+          "message": "O propriedade não anulável 'Name' precisa conter um valor não nulo ao sair do construtor. Considere declarar o propriedade como anulável.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///home/guilherme/Documentos/csharp-aceleracao/exercicios/csharp-001-projeto-trybe-hotel-fase-c/src/TrybeHotel/Models/Hotel.cs",
+                "region": {
+                  "startLine": 10,
+                  "startColumn": 17,
+                  "endLine": 10,
+                  "endColumn": 21
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8618",
+          "level": "warning",
+          "message": "O propriedade não anulável 'Address' precisa conter um valor não nulo ao sair do construtor. Considere declarar o propriedade como anulável.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///home/guilherme/Documentos/csharp-aceleracao/exercicios/csharp-001-projeto-trybe-hotel-fase-c/src/TrybeHotel/Models/Hotel.cs",
+                "region": {
+                  "startLine": 12,
+                  "startColumn": 17,
+                  "endLine": 12,
+                  "endColumn": 24
                 }
               }
             }

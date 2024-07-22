@@ -87,6 +87,7 @@ namespace TrybeHotel.Controllers
         /// <param name="RoomId">Id do quarto que deseja remover.</param>
         /// <response code="204">Caso a operação seja bem sucedida.</response>
         /// <response code="401"> Se o usuário não possuir a autorização necessária ou caso esteja inválida.</response>
+        /// <response code="404"> Se não for encontrado um quarto com o id especificado. </response>
         /// <response code="500"> Se ocorrer um erro interno do servidor.</response>
         [HttpDelete("{RoomId}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -98,6 +99,10 @@ namespace TrybeHotel.Controllers
                 _repository.DeleteRoom(RoomId);
 
                 return NoContent();
+            }
+            catch (EntityNotFoundException e)
+            {
+                return NotFound(new { message = e.Message });
             }
             catch (Exception e)
             {

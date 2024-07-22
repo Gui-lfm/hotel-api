@@ -42,10 +42,16 @@ namespace TrybeHotel.Controllers
         /// </summary>
         /// <param name="city">Objeto CityDtoInsert contendo o nome e estado da cidade:</param>
         /// <response code="201">Retorna os itens do objeto CityDto.</response>
+        /// <response code="400">Se os dados fornecidos forem inválidos.</response>
         /// <response code="500">Se ocorrer um erro interno do servidor.</response>
         [HttpPost]
         public IActionResult PostCity([FromBody] CityDtoInsert city)
         {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
             try
             {

@@ -32,14 +32,22 @@ namespace TrybeHotel.Controllers
         [Route("status")]
         public async Task<IActionResult> GetStatus()
         {
-            var status = await _geoService.GetGeoStatus();
-
-            if (status == null)
+            try
             {
-                return BadRequest();
-            }
+                var status = await _geoService.GetGeoStatus();
 
-            return Ok(status);
+                if (status == null)
+                {
+                    return BadRequest();
+                }
+
+                return Ok(status);
+            }
+            catch (Exception e)
+            {
+
+                return StatusCode(500, new { message = e.Message });
+            }
         }
 
         [HttpGet]
