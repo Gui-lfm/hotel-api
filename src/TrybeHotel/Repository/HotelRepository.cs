@@ -42,16 +42,22 @@ namespace TrybeHotel.Repository
             return DtoResponse.ToList();
         }
 
-        public HotelDto AddHotel(Hotel hotel)
+        public HotelDto AddHotel(HotelDtoInsert hotelDto)
         {
-            var cityExists = _entityUtils.VerifyCity(hotel.CityId);
+            var cityExists = _entityUtils.VerifyCity(hotelDto.CityId);
 
-            hotel.City = cityExists;
+            var newHotel = new Hotel
+            {
+                Name = hotelDto.Name!,
+                Address = hotelDto.Address!,
+                CityId = hotelDto.CityId,
+                City = cityExists
+            };
 
-            _context.Hotels.Add(hotel);
+            _context.Hotels.Add(newHotel);
             _context.SaveChanges();
 
-            var createdDto = _entityUtils.CreateHotelDto(hotel);
+            var createdDto = _entityUtils.CreateHotelDto(newHotel);
 
             return createdDto;
         }
